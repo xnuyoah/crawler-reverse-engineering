@@ -1,4 +1,4 @@
-// Spider browser-hook profile: filtered cookie/header observation with request binding.
+// Crawler Reverse Engineering browser-hook profile: filtered cookie/header observation with request binding.
 (function () {
   'use strict';
 

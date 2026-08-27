@@ -41,7 +41,7 @@ from validate_skill import (  # noqa: E402
 SCHEMA_VERSION = 1
 OFFICIAL_SUITE_TASK_COUNT = 149
 OFFICIAL_SUITE_CONTRACT_SHA256 = (
-    "46d5afad7dbb9acd068188f762576d81c89bf545e4b794c2feef32f4f6eea930"
+    "a7cc1f5844d2b75df1d13b968334ed42865bb93116382797228ec32008724e22"
 )
 DEFAULT_SKILL_ROOT = SCRIPT_DIR.parent
 DEFAULT_SUITE_RELATIVE_PATH = Path("references/official-self-test-task-suite.md")

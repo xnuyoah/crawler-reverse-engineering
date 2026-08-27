@@ -1,6 +1,6 @@
 # Forward Testing Playbook
 
-Use this playbook after changing `spider-king` when the claim is about agent
+Use this playbook after changing `crawler-reverse-engineering` when the claim is about agent
 behavior, routing, or conclusions rather than file structure alone.
 
 ## Contents

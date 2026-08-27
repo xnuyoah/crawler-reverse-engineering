@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Spider King's structure and behavior-preservation invariants."""
+"""Validate Crawler Reverse Engineering's structure and behavior-preservation invariants."""
 
 from __future__ import annotations
 
@@ -55,7 +55,7 @@ MAX_VALIDATION_FILE_BYTES = 16 * 1024 * 1024
 MAX_SELF_TEST_OUTPUT_BYTES = 1024 * 1024
 OFFICIAL_SUITE_TASK_COUNT = 149
 OFFICIAL_SUITE_CONTRACT_SHA256 = (
-    "46d5afad7dbb9acd068188f762576d81c89bf545e4b794c2feef32f4f6eea930"
+    "a7cc1f5844d2b75df1d13b968334ed42865bb93116382797228ec32008724e22"
 )
 TRUSTED_SKILL_ROOT = Path(__file__).resolve().parents[1]
 MarkerGroups = tuple[tuple[str, ...], ...]
@@ -66,7 +66,7 @@ PROFILE_LOCAL_ROUTE_TOKENS = frozenset(
         "js-reverse",
         "live-target",
         "set-cookie",
-        "spider-king",
+        "crawler-reverse-engineering",
     }
 )
 PROFILE_HANDOFF_CONTEXT_MARKERS = (
@@ -77,7 +77,7 @@ PROFILE_HANDOFF_CONTEXT_MARKERS = (
     "route to",
 )
 PROFILE_SPECIAL_HANDOFF_TOKENS = (
-    "`spider-king` AST profile",
+    "`crawler-reverse-engineering` AST profile",
 )
 PROFILE_AVAILABILITY_MARKERS = (
     "capability snapshot",
@@ -98,7 +98,6 @@ PROFILE_FALLBACK_MARKERS = (
     "不存在时",
 )
 ROOT_SHADOW_DOCUMENTS = (
-    "README.md",
     "INSTALLATION_GUIDE.md",
     "QUICK_REFERENCE.md",
     "CHANGELOG.md",
@@ -715,7 +714,7 @@ def validate_frontmatter(skill_text: str, result: Validation) -> None:
         key, value = line.split(":", 1)
         fields[key.strip()] = value.strip()
 
-    result.require(fields.get("name") == "spider-king", "frontmatter name must be spider-king")
+    result.require(fields.get("name") == "crawler-reverse-engineering", "frontmatter name must be crawler-reverse-engineering")
     result.require(bool(fields.get("description")), "frontmatter description must be present")
     result.require(
         set(fields) == {"name", "description"},
@@ -798,16 +797,16 @@ def validate_openai_metadata(metadata_text: str, result: Validation) -> None:
     short_description = values.get("short_description", "")
     default_prompt = values.get("default_prompt", "")
     result.require(
-        display_name == "Spider King",
-        "agents/openai.yaml interface.display_name must match Spider King",
+        display_name == "Crawler Reverse Engineering",
+        "agents/openai.yaml interface.display_name must match Crawler Reverse Engineering",
     )
     result.require(
         not short_description or 25 <= len(short_description) <= 64,
         "agents/openai.yaml interface.short_description must be 25-64 characters",
     )
     result.require(
-        "$spider-king" in default_prompt,
-        "agents/openai.yaml interface.default_prompt must mention $spider-king",
+        "$crawler-reverse-engineering" in default_prompt,
+        "agents/openai.yaml interface.default_prompt must mention $crawler-reverse-engineering",
     )
     result.require(
         "sequential" in default_prompt.lower(),
@@ -1268,6 +1267,12 @@ def validate_directory_hygiene(root: Path, result: Validation) -> None:
                 result.errors.append(
                     f"auxiliary skill document is not allowed: {relative}"
                 )
+
+    for path in sorted(root.rglob("README.md")):
+        if is_validation_ignored(path) or path.parent == root:
+            continue
+        relative = path.relative_to(root).as_posix()
+        result.errors.append(f"auxiliary skill document is not allowed: {relative}")
 
 
 def is_reparse_point(path: Path) -> bool:
@@ -1840,7 +1845,7 @@ def build_parser() -> argparse.ArgumentParser:
         "root",
         nargs="?",
         default=str(Path(__file__).resolve().parents[1]),
-        help="Spider King skill directory",
+        help="Crawler Reverse Engineering skill directory",
     )
     parser.add_argument("--baseline", help="Original skill directory used for preservation checks")
     parser.add_argument(

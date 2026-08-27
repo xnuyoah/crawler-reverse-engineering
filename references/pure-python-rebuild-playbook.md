@@ -11,7 +11,7 @@ All conditions must be true before skipping fresh target discovery:
 3. The user wants pure Python maintenance, primitive regression, request glue, or a deterministic port.
 4. The remaining work can be checked with fixed fixtures before live replay.
 
-If the entry, script URL, version, call chain, session bootstrap, transport wrapper, response decoder, or pagination state is still unknown, return to the Spider core loop or hand entry/call-chain discovery to a dedicated reverse skill when available (for example `camoufox-js-reverse`); otherwise continue with `chrome-devtools` / `js-reverse` evidence surfaces.
+If the entry, script URL, version, call chain, session bootstrap, transport wrapper, response decoder, or pagination state is still unknown, return to the Crawler Reverse Engineering core loop or hand entry/call-chain discovery to a dedicated reverse skill when available (for example `camoufox-js-reverse`); otherwise continue with `chrome-devtools` / `js-reverse` evidence surfaces.
 
 ## Rebuild Loop
 
@@ -33,7 +33,7 @@ If the entry, script URL, version, call chain, session bootstrap, transport wrap
 4. Do not claim a primitive template is a full generator.
 5. Do not add Node, jsdom, iv8, Playwright, Selenium, CDP, or page-context execution to the final dependency path.
 6. Final request glue must expose a PyCharm right-click runnable Python entrypoint with no required CLI arguments. Command-line wrappers are optional verification tools, not the delivery interface.
-7. Keep target-specific vectors under the task workspace or `references/examples/`; they illustrate the method but do not define Spider ownership.
+7. Keep target-specific vectors under the task workspace or `references/examples/`; they illustrate the method but do not define Crawler Reverse Engineering ownership.
 
 ## Verification Gates
 

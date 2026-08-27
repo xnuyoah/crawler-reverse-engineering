@@ -20,7 +20,7 @@ Use `{"request": {...}, "result": null}` initially, then replace only the `resul
 ## Before Handoff
 
 1. Confirm the intended specialist exists in the current capability snapshot.
-2. Name an executable Spider fallback when it does not exist. If the user explicitly required the missing specialist/runtime, present the fallback for acceptance; do not silently treat it as equivalent.
+2. Name an executable Crawler Reverse Engineering fallback when it does not exist. If the user explicitly required the missing specialist/runtime, present the fallback for acceptance; do not silently treat it as equivalent.
 3. Park or release the current same-target owner before the next owner becomes `TARGET_ACTIVE`.
 4. Preserve unique unreplayable state as `RETAINED_EXCEPTION`; do not destroy it just to make cleanup look complete.
 5. Reference secrets by task-local path plus hash only. Never embed raw Cookie, Authorization, token, key, IV, account, or private payload values.
@@ -36,9 +36,9 @@ The envelope's `request` member is:
   "schemaVersion": 1,
   "taskId": "non-secret task identifier",
   "intakeMode": "live-target | artifact-only | continuation",
-  "fromRoute": "current Spider route",
-  "requestedOwner": "installed specialist or focused Spider route",
-  "fallbackRoute": "executable Spider route",
+  "fromRoute": "current Crawler Reverse Engineering route",
+  "requestedOwner": "installed specialist or focused Crawler Reverse Engineering route",
+  "fallbackRoute": "executable Crawler Reverse Engineering route",
   "reason": "one proved blocker",
   "scope": {
     "scheme": null,
@@ -79,7 +79,7 @@ The envelope's `request` member is:
 }
 ```
 
-Unknown or omitted permissions mean blocked. Every boolean, enum, counter, delay, scope field, and path must be equal to or narrower than the upstream work order. The specialist may consume only the recorded budget and may write only the recorded `allowedPaths`; `task-cache-only` without a non-empty inherited allowlist grants no write. A live-target specialist must follow the same serial browser ownership and paired evidence rules as Spider King.
+Unknown or omitted permissions mean blocked. Every boolean, enum, counter, delay, scope field, and path must be equal to or narrower than the upstream work order. The specialist may consume only the recorded budget and may write only the recorded `allowedPaths`; `task-cache-only` without a non-empty inherited allowlist grants no write. A live-target specialist must follow the same serial browser ownership and paired evidence rules as Crawler Reverse Engineering.
 
 ## Return Shape
 
@@ -103,13 +103,13 @@ The owner returns this object and, only when authorized, stores it as the envelo
   "budgetConsumed": {},
   "runtimeCleanupState": "RELEASED | PARKED | RETAINED_EXCEPTION",
   "residualRisks": [],
-  "recommendedNextOwner": "Spider route or none"
+  "recommendedNextOwner": "Crawler Reverse Engineering route or none"
 }
 ```
 
 ## Acceptance
 
-Spider King remains responsible for accepting the return against the recorded test and final delivery gate. Specialist completion is not protocol completion. Reject or send back a result when it:
+Crawler Reverse Engineering remains responsible for accepting the return against the recorded test and final delivery gate. Specialist completion is not protocol completion. Reject or send back a result when it:
 
 - cites no artifact hash for a technical claim
 - substitutes helper load, output shape, or HTTP status for the requested oracle

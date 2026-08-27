@@ -1,6 +1,6 @@
 # Architecture
 
-This file documents the Spider env-patch profile architecture and runtime behavior.
+This file documents the Crawler Reverse Engineering env-patch profile architecture and runtime behavior.
 
 ## Contents
 

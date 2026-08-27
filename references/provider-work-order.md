@@ -101,7 +101,7 @@ Use the matching template in `references/report-templates.md`. Persist it only a
 - A route may return evidence, code, or a blocker; it does not redefine the final goal.
 - Do not load sibling route manuals or broad playbooks just because the current route is frustrating.
 - If a route needs another capability, stop and name the blocker before switching; return the request and result fields from `references/specialist-handoff-contract.md` when ownership changes. Persist them only when the active work order authorizes the exact handoff path.
-- Provider completion is not task completion. Spider King accepts only against the recorded acceptance test and the gate for the declared result shape.
+- Provider completion is not task completion. Crawler Reverse Engineering accepts only against the recorded acceptance test and the gate for the declared result shape.
 
 ## Egress Guard
 

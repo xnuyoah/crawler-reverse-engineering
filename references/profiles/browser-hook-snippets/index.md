@@ -15,7 +15,7 @@
 
 围绕用户已知的观察点交付一个最小、可恢复、低噪声的浏览器 Hook。本 profile 不负责找到最终函数位置，也不负责把采样代码迁移到本地运行时。
 
-阶段协议沿用 Spider King 主入口与 `references/workflow-overview.md`；本 profile 主要承担 Capture（观察取证）。本文件中的 `scripts/` 和 `references/` 均相对于 `$HOOK_PROFILE=$SKILL_DIR/references/profiles/browser-hook-snippets`。
+阶段协议沿用 Crawler Reverse Engineering 主入口与 `references/workflow-overview.md`；本 profile 主要承担 Capture（观察取证）。本文件中的 `scripts/` 和 `references/` 均相对于 `$HOOK_PROFILE=$SKILL_DIR/references/profiles/browser-hook-snippets`。
 
 ## 触发边界
 
@@ -30,13 +30,13 @@
 
 | 用户真正要的结果 | 转交 |
 |---|---|
-| 脚本 URL、函数位置、initiator 或完整调用链 | capability snapshot 中有专用 JS 逆向技能时转交；否则返回 Spider core loop，用 `chrome-devtools` / `js-reverse` initiator evidence 定位 |
+| 脚本 URL、函数位置、initiator 或完整调用链 | capability snapshot 中有专用 JS 逆向技能时转交；否则返回 Crawler Reverse Engineering core loop，用 `chrome-devtools` / `js-reverse` initiator evidence 定位 |
 | 整份源码的结构化还原 | AST profile 存在时转交；否则使用 `references/offline-inline-deob-playbook.md` 与 `references/obfuscation-guide.md` 做本地静态恢复 |
-| 已知入口在 Node.js/VM 中运行 | `spider-king` env-patch profile |
-| 明确 Python + iv8 请求脚本 | capability snapshot 中有 iv8 专用技能时转交；否则报告约束未满足，只有用户接受替代后才使用 env-patch 或 Spider local-helper boundary |
-| 多层协议和最终 collector | 退出 profile，返回 Spider core loop |
+| 已知入口在 Node.js/VM 中运行 | `crawler-reverse-engineering` env-patch profile |
+| 明确 Python + iv8 请求脚本 | capability snapshot 中有 iv8 专用技能时转交；否则报告约束未满足，只有用户接受替代后才使用 env-patch 或 Crawler Reverse Engineering local-helper boundary |
+| 多层协议和最终 collector | 退出 profile，返回 Crawler Reverse Engineering core loop |
 
-所有外部转交都先读取 capability snapshot。不得假设某个技能存在；专用技能不可用时必须执行表中的 Spider fallback。
+所有外部转交都先读取 capability snapshot。不得假设某个技能存在；专用技能不可用时必须执行表中的 Crawler Reverse Engineering fallback。
 
 ## 默认输出
 
@@ -60,7 +60,7 @@
 5. 明确触发动作，验证一次命中。
 6. 提供恢复方式；需要落地日志时写入执行项目的 `js_reverse_cache/`。
 
-先声明 intake mode。`artifact-only` 或未要求检查当前页面时，直接交付 Console/Snippets 脚本并标记现场命中未验证；需要与当前目标发生新交互时改为 `live-target`，执行 Spider 主入口规定的顺序双工具取证。只有用户要求直接注入时才修改页面；其他 `live-target` 场景在完成证据采集后交付脚本，不擅自注入。
+先声明 intake mode。`artifact-only` 或未要求检查当前页面时，直接交付 Console/Snippets 脚本并标记现场命中未验证；需要与当前目标发生新交互时改为 `live-target`，执行 Crawler Reverse Engineering 主入口规定的顺序双工具取证。只有用户要求直接注入时才修改页面；其他 `live-target` 场景在完成证据采集后交付脚本，不擅自注入。
 
 ## 数据与请求绑定
 
@@ -89,7 +89,7 @@
 | 属性不可配置 | Hook 外围调用点或原型方法 | 不强行覆盖 descriptor |
 | 页面行为改变 | 恢复原对象并缩小范围 | 改条件断点、initiator 或引擎 trace |
 | 日志刷屏 | 加 URL、字段、次数和长度过滤 | 默认关闭完整值 |
-| 用户转而要函数位置或调用链 | 停止扩写 Hook | 按上方 capability-aware 转交；不可用时返回 Spider core loop |
+| 用户转而要函数位置或调用链 | 停止扩写 Hook | 按上方 capability-aware 转交；不可用时返回 Crawler Reverse Engineering core loop |
 | 用户转而要本地执行 | 固定样本和入口线索 | 已知 Node/VM 入口转 env-patch；明确 iv8 时按 capability-aware 转交 |
 
 ## 资源路由

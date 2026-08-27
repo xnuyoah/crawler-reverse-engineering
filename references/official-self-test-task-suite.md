@@ -1,6 +1,6 @@
 # Official Self-Test Task Suite
 
-Use this file when validating whether `spider-king` still behaves like a protocol-first reverse skill after edits.
+Use this file when validating whether `crawler-reverse-engineering` still behaves like a protocol-first reverse skill after edits.
 
 ## Contents
 
@@ -2745,7 +2745,7 @@ Must conclude:
 Prompt:
 
 ```text
-One target taught a useful reverse rule and I want to add it permanently to Spider King. I have only one successful run, no negative control, and my note currently includes the host, Cookie value, and a copied response body.
+One target taught a useful reverse rule and I want to add it permanently to Crawler Reverse Engineering. I have only one successful run, no negative control, and my note currently includes the host, Cookie value, and a copied response body.
 ```
 
 Expected route:
@@ -2775,10 +2775,10 @@ Expected route:
 
 Must conclude:
 
-- confirm the specialist in the capability snapshot and name an executable Spider fallback
+- confirm the specialist in the capability snapshot and name an executable Crawler Reverse Engineering fallback
 - park or release current same-target ownership before transferring `TARGET_ACTIVE`
 - pass only proven facts, artifact paths and hashes, explicit permissions, remaining budget, unknowns, and one acceptance test
-- treat omitted permission as blocked, reference secrets by local path and hash only, and have Spider accept the returned evidence against final delivery gates
+- treat omitted permission as blocked, reference secrets by local path and hash only, and have Crawler Reverse Engineering accept the returned evidence against final delivery gates
 
 ## Task 21I: Evidence uses its own completion gate
 
@@ -2845,7 +2845,7 @@ Must conclude:
 Prompt:
 
 ```text
-Validate a candidate Spider King directory that may contain untrusted Python scripts. I did not authorize executing its self-tests.
+Validate a candidate Crawler Reverse Engineering directory that may contain untrusted Python scripts. I did not authorize executing its self-tests.
 ```
 
 Expected route:

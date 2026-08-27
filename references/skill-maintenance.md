@@ -1,6 +1,6 @@
 # Skill Maintenance
 
-Use this file when modifying `spider-king` itself.
+Use this file when modifying `crawler-reverse-engineering` itself.
 
 ## Contents
 
@@ -36,7 +36,7 @@ Pass conditions:
 - trusted self-tests recursively reject symlinks, reparse points, hard-linked dependencies, and root escapes across the full local `scripts/` tree, then terminate their process tree on timeout
 - static Python validation recursively parses every shipped `.py` file outside cache directories, including tests and reusable examples
 - generated tool caches (`.pytest_cache`, `.ruff_cache`, `.mypy_cache`, and `__pycache__`) are package errors; scanners may skip their contents only to avoid duplicate noise
-- `agents/openai.yaml` parses as YAML with typed `interface` metadata, a 25-64 character short description, a `$spider-king` default prompt, and a boolean implicit-invocation policy
+- `agents/openai.yaml` parses as YAML with typed `interface` metadata, a 25-64 character short description, a `$crawler-reverse-engineering` default prompt, and a boolean implicit-invocation policy
 - final delivery never depends on browser automation
 - final delivery is Python collector first, with JS limited to local parameter restoration only
 - minimal missing evidence is requested instead of broad homework for the user
@@ -53,7 +53,7 @@ Pass conditions:
 - the skill-owned loopback practice lab stays a direct-HTTP fixture and does not trigger the fresh live-target browser gate
 - the entry `SKILL.md` stays lean enough to route to detailed references instead of duplicating them
 - every Markdown reference longer than 100 logical lines retains a top-level `## Contents` section
-- every profile handoff is capability-aware: use an installed specialist when available and name an executable Spider fallback when unavailable
+- every profile handoff is capability-aware: use an installed specialist when available and name an executable Crawler Reverse Engineering fallback when unavailable
 - every profile-local `references/` or `scripts/` route resolves from either the profile root or the skill root
 - profile dependency installation occurs only in an approved task-local copy, never in the skill directory
 

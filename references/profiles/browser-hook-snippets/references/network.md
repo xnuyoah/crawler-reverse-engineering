@@ -23,4 +23,4 @@
 
 ## 页面上下文
 
-Console 处于 isolated world 时才把同一受控脚本注入 main world。注入不改变过滤、上限、摘要和 restore 契约。用户真正要 initiator 或完整调用链时停止扩写 Hook，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Spider core loop。
+Console 处于 isolated world 时才把同一受控脚本注入 main world。注入不改变过滤、上限、摘要和 restore 契约。用户真正要 initiator 或完整调用链时停止扩写 Hook，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Crawler Reverse Engineering core loop。

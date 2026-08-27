@@ -1,4 +1,4 @@
-// Spider browser-hook profile: filtered WebCrypto/CryptoJS metadata with restore.
+// Crawler Reverse Engineering browser-hook profile: filtered WebCrypto/CryptoJS metadata with restore.
 (function () {
   'use strict';
 
