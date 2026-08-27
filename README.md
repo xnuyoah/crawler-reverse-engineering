@@ -1,6 +1,6 @@
 ﻿# Crawler Reverse Engineering
 
-<img width="1024" height="572" alt="Crawler Reverse Engineering" src="https://github.com/user-attachments/assets/a621e863-09c6-418f-a320-d453f3330f7a" />
+<img width="1024" alt="爬虫逆向工程" src="./assets/crawler-reverse-engineering-banner-zh.png" />
 
 `Crawler Reverse Engineering` 是一套面向 Web 协议恢复、参数还原、挑战链路拆解与纯协议交付的逆向工程 Skill。
 
