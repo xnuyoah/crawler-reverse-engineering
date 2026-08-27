@@ -1,6 +1,6 @@
 ---
 name: spider-king
-description: Reverse hostile web clients into pure-protocol collectors with Python-first delivery. For a fresh live target, begin with sequential `chrome-devtools` and `js-reverse` evidence; for artifact-only input, analyze the supplied request, packet capture, JavaScript, WASM, token, or cookie sample without inventing browser proof; for a continuation, reuse the current gate when its target and environment are unchanged. Deliver a browser-free Python collector plus a tiny local helper only when needed. Use for hostile sign, token, cookie, WebSocket, GraphQL, protobuf, response-decode, browser-fingerprint, WebAssembly, challenge-bootstrap, or dynamic-font flows.
+description: "crawler-reverse-engineering: Recover hostile web-client protocols into browser-free Python collectors. Use for reverse engineering request signatures, tokens, cookies, encrypted responses, browser fingerprints, WebAssembly, or stateful API flows from live targets or supplied artifacts."
 ---
 
 # Spider King
