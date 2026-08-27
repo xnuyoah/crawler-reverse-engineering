@@ -519,12 +519,48 @@ class DirectoryHygieneValidationTests(unittest.TestCase):
     def test_accepts_root_readme_repository_document(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / "README.md").write_text("# Repository overview\n", encoding="utf-8")
+            (root / "README.md").write_text(
+                "# Crawler Reverse Engineering\n\n"
+                "Install crawler-reverse-engineering as a skill.\n",
+                encoding="utf-8",
+            )
             result = validate_skill.Validation()
 
             validate_skill.validate_directory_hygiene(root, result)
 
             self.assertEqual(result.errors, [])
+
+    def test_rejects_root_readme_with_legacy_title(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "README.md").write_text(
+                "# Spider King\n\nInstall crawler-reverse-engineering as a skill.\n",
+                encoding="utf-8",
+            )
+            result = validate_skill.Validation()
+
+            validate_skill.validate_directory_hygiene(root, result)
+
+            self.assertTrue(
+                any("一级标题必须是" in error for error in result.errors),
+                result.errors,
+            )
+
+    def test_rejects_root_readme_without_canonical_skill_name(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "README.md").write_text(
+                "# Crawler Reverse Engineering\n\nInstall spider-king as a skill.\n",
+                encoding="utf-8",
+            )
+            result = validate_skill.Validation()
+
+            validate_skill.validate_directory_hygiene(root, result)
+
+            self.assertTrue(
+                any("必须包含技能机器名" in error for error in result.errors),
+                result.errors,
+            )
 
     def test_rejects_nested_readme_auxiliary_document(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
