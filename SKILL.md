@@ -1,6 +1,6 @@
 ---
 name: spider-king
-description: crawler-reverse-engineering
+description: "crawler-reverse-engineering: Recover hostile web-client protocols into browser-free Python collectors. Use for reverse engineering request signatures, tokens, cookies, encrypted responses, browser fingerprints, WebAssembly, or stateful API flows from live targets or supplied artifacts."
 ---
 
 # Spider King
