@@ -13,7 +13,7 @@ Use this before the first save, before promoting code out of cache, and whenever
 
 ## Core Rule
 
-Spider King keeps volatile reverse evidence separate from stable delivery code.
+Crawler Reverse Engineering keeps volatile reverse evidence separate from stable delivery code.
 
 Task captures and probes go under:
 

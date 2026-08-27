@@ -22,4 +22,4 @@
 
 只观察 source 命中特定 token 的 callback，不取消、不改 delay、不清空所有 timer。记录 delay、callback 类型和一次 stack；restore 后原 timer API 必须保持引用一致。
 
-未知动态入口或需要完整函数位置时，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Spider core loop。本 profile 不通过扩大 Runtime Hook 来代替调用链取证。
+未知动态入口或需要完整函数位置时，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Crawler Reverse Engineering core loop。本 profile 不通过扩大 Runtime Hook 来代替调用链取证。

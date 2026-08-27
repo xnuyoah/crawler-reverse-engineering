@@ -1,4 +1,4 @@
-// Spider browser-hook profile: filtered XHR/fetch observation with restore.
+// Crawler Reverse Engineering browser-hook profile: filtered XHR/fetch observation with restore.
 (function () {
   'use strict';
 

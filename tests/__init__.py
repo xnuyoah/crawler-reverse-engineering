@@ -1,1 +1,1 @@
-"""Executable regression tests for the Spider King skill tools."""
+"""Executable regression tests for the Crawler Reverse Engineering skill tools."""

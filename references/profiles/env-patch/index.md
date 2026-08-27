@@ -13,9 +13,9 @@
 
 ## 唯一职责
 
-接收已确认的 JS 入口和浏览器样本，完成 `Rebuild -> Patch -> Consolidate`。本 profile 不负责从未知站点寻找入口；完整协议编排仍由 Spider core loop 拥有。
+接收已确认的 JS 入口和浏览器样本，完成 `Rebuild -> Patch -> Consolidate`。本 profile 不负责从未知站点寻找入口；完整协议编排仍由 Crawler Reverse Engineering core loop 拥有。
 
-共享阶段与 handoff 字段由 Spider King 主入口、`references/workflow-overview.md` 与任务目录 `js_reverse_cache/tasks/<task-id>/` 约定定义。
+共享阶段与 handoff 字段由 Crawler Reverse Engineering 主入口、`references/workflow-overview.md` 与任务目录 `js_reverse_cache/tasks/<task-id>/` 约定定义。
 
 ## 准入条件
 
@@ -29,12 +29,12 @@
 
 | 当前缺口 | 首选路由 | 专用能力不可用时 |
 |---|---|---|
-| 缺少入口或调用链 | 已安装的专用 JS 逆向技能 | 返回 Spider core loop，用 `chrome-devtools` / `js-reverse` initiator evidence 定位 |
-| 只需观察 Hook | Spider browser-hook profile | 直接使用本技能内置 profile |
+| 缺少入口或调用链 | 已安装的专用 JS 逆向技能 | 返回 Crawler Reverse Engineering core loop，用 `chrome-devtools` / `js-reverse` initiator evidence 定位 |
+| 只需观察 Hook | Crawler Reverse Engineering browser-hook profile | 直接使用本技能内置 profile |
 | 整文件 AST 还原 | `../static-ast/index.md` | 使用 `references/offline-inline-deob-playbook.md` 与 `references/obfuscation-guide.md` 本地恢复 |
 | 明确 Python + iv8 | 已安装的 iv8 专用技能 | 报告能力缺失；只有用户接受替代后，才改走 env-patch 或最小 local helper boundary |
-| CAPTCHA/TDC collect、行为数据或 verify | 已安装的匹配 specialist primary | 返回 Spider core loop；本 profile 只保留 Node/VM secondary backend |
-| 多层协议或最终 collector | Spider core loop | 退出本 profile，不在补环境层扩张协议职责 |
+| CAPTCHA/TDC collect、行为数据或 verify | 已安装的匹配 specialist primary | 返回 Crawler Reverse Engineering core loop；本 profile 只保留 Node/VM secondary backend |
+| 多层协议或最终 collector | Crawler Reverse Engineering core loop | 退出本 profile，不在补环境层扩张协议职责 |
 
 瑞数入口 runtime 已确认且目标是 Node.js/VM 补环境时，本 profile 可以继续；入口尚未定位时执行上表的调用链路由。
 
@@ -150,7 +150,7 @@ Hook 型 SDK 的常见顺序是：`env -> fake transport -> target JS -> capture
 1. 一条复现链选择一个 baseline，不混拼 UA、Cookie、storage、screen、canvas 或 TLS 来源。
 2. 记录 URL、时间、session、未采集字段和输出路径。
 3. 原始快照只写任务目录，不进入公开 case。
-4. 被风控阻断且需要反检测基线时，使用 capability snapshot 中可用的专用浏览器逆向技能采证；不可用时返回 Spider core loop，执行顺序 `chrome-devtools` / `js-reverse` 取证后再交回。
+4. 被风控阻断且需要反检测基线时，使用 capability snapshot 中可用的专用浏览器逆向技能采证；不可用时返回 Crawler Reverse Engineering core loop，执行顺序 `chrome-devtools` / `js-reverse` 取证后再交回。
 
 🔴 CHECKPOINT：写入 seed 前声明唯一 baseline、session 关联和目标 patch；来源冲突时先停。
 
@@ -176,7 +176,7 @@ Hook 型 SDK 的常见顺序是：`env -> fake transport -> target JS -> capture
 | 两轮没有推进 | 回查 first divergence 和加载顺序 | 升级高级路径或报告边界 |
 | 浏览器 seed 冲突 | 保留一个 baseline | 其它样本只作诊断对照 |
 | load 成功但输出不一致 | 比较固定输入和关键中间值 | 不封装请求层 |
-| 服务端拒绝 | 检查 session、序列化、时间和 transport | 必要时退出 profile，由 Spider core loop 协调协议层 |
+| 服务端拒绝 | 检查 session、序列化、时间和 transport | 必要时退出 profile，由 Crawler Reverse Engineering core loop 协调协议层 |
 
 ## Reference Router
 

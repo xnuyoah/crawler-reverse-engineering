@@ -107,4 +107,4 @@ Pin the shipped local engine version when helper parity depends on native-surfac
 
 ## Executable profile
 
-When the entry, invocation contract, and fixed expected output are already known, prefer the executable diagnosis loop in `references/profiles/env-patch/index.md` over inventing ad-hoc `window` stubs. Keep pure protocol work in the Spider core loop; use the profile only for host-surface gaps.
+When the entry, invocation contract, and fixed expected output are already known, prefer the executable diagnosis loop in `references/profiles/env-patch/index.md` over inventing ad-hoc `window` stubs. Keep pure protocol work in the Crawler Reverse Engineering core loop; use the profile only for host-surface gaps.

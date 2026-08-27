@@ -1,9 +1,9 @@
 ---
-name: spider-king
+name: crawler-reverse-engineering
 description: "crawler-reverse-engineering: Recover hostile web-client protocols into browser-free Python collectors. Use for reverse engineering request signatures, tokens, cookies, encrypted responses, browser fingerprints, WebAssembly, or stateful API flows from live targets or supplied artifacts."
 ---
 
-# Spider King
+# Crawler Reverse Engineering
 
 ## Mission
 
@@ -58,7 +58,7 @@ Use a focused route when the goal is already narrow. Do not restart full unknown
 | Unknown or multi-layer end-to-end collector | Continue Startup Gate + Universal Reverse Loop below |
 | Entry/call-chain location only | Dedicated reverse skill when available; else `chrome-devtools` / `js-reverse` initiator evidence |
 | Explicit Python + iv8 runtime | iv8 skill when available; if unavailable, report the unmet constraint and use env-patch/local helper only after the user accepts that substitution |
-| Confirmed CAPTCHA/TDC or family-owned protocol | Matching specialist skill when available; Spider stays secondary runtime help only |
+| Confirmed CAPTCHA/TDC or family-owned protocol | Matching specialist skill when available; Crawler Reverse Engineering stays secondary runtime help only |
 
 Focused profile rules:
 

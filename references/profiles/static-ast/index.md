@@ -14,7 +14,7 @@ Use this profile after a supplied JavaScript asset is already an evidence artifa
 
 ## Entry conditions
 
-For structure-only detection and conservative restoration, the supplied input file plus a bounded inspection goal is sufficient. A fixed request or runtime sample becomes mandatory before claiming algorithm equivalence, evaluating a recovered boundary, executing target code, or escalating to a dynamic route. If the entry or call chain is required by the user's goal but remains unknown, return to the Spider core loop before broad deobfuscation.
+For structure-only detection and conservative restoration, the supplied input file plus a bounded inspection goal is sufficient. A fixed request or runtime sample becomes mandatory before claiming algorithm equivalence, evaluating a recovered boundary, executing target code, or escalating to a dynamic route. If the entry or call chain is required by the user's goal but remains unknown, return to the Crawler Reverse Engineering core loop before broad deobfuscation.
 
 ## Usage
 
@@ -46,7 +46,7 @@ The runner writes:
 - `pipeline-report.json`: status, hashes, step timings, and last-good file
 - `final.js`: the last parseable artifact, even when a later step fails
 
-The profile is a readability aid, not proof of an algorithm. Prove the recovered boundary with fixed vectors and wire evidence before handing it to an installed signer specialist confirmed in the capability snapshot; otherwise use the Spider pure-Python route.
+The profile is a readability aid, not proof of an algorithm. Prove the recovered boundary with fixed vectors and wire evidence before handing it to an installed signer specialist confirmed in the capability snapshot; otherwise use the Crawler Reverse Engineering pure-Python route.
 
 ## Supported static observations
 

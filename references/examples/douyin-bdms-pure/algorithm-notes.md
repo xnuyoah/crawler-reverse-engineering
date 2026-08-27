@@ -1,6 +1,6 @@
 # Douyin a_bogus Pure Python Example Notes
 
-本文件是 `references/pure-python-rebuild-playbook.md` 的案例化参考，记录一个抖音 Web BDMS `a_bogus` 纯 Python 纯算维护场景。目标是说明固定 trace、primitive regression 和显式指纹输入的组织方式，而不是给 Spider 增加一个站点专属 profile。
+本文件是 `references/pure-python-rebuild-playbook.md` 的案例化参考，记录一个抖音 Web BDMS `a_bogus` 纯 Python 纯算维护场景。目标是说明固定 trace、primitive regression 和显式指纹输入的组织方式，而不是给 Crawler Reverse Engineering 增加一个站点专属 profile。
 
 > 边界：本文件是已有完整实现的维护线索，不是可从零实现的完整规范。它没有 `id146/147/148` 的全部位级公式、完整 fields[24..87] 构造、最终 payload 布局或动态 alphabet 推导。只有本文件和 bundled primitives 时，不得声称已恢复完整生成器。
 

@@ -1,6 +1,6 @@
 # Webpack Module Extraction
 
-当已定位的加密入口位于 webpack bundle 中时使用。入口未知时不要先做本流程，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Spider core loop。
+当已定位的加密入口位于 webpack bundle 中时使用。入口未知时不要先做本流程，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Crawler Reverse Engineering core loop。
 
 ## 识别模式
 

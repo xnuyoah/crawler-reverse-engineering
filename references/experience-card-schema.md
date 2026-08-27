@@ -110,7 +110,7 @@ Candidates stay task-local and are never consumed as reusable cards. At minimum,
     "kind": "missing | value | order | framing | state | transport"
   },
   "decision": {
-    "preferredRoute": "Spider route name",
+    "preferredRoute": "Crawler Reverse Engineering route name",
     "action": "smallest reusable action",
     "fallback": "named fallback when the boundary does not hold"
   },

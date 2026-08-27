@@ -1,4 +1,4 @@
-// Spider browser-hook profile: filtered Storage writes/removals with restore.
+// Crawler Reverse Engineering browser-hook profile: filtered Storage writes/removals with restore.
 (function () {
   'use strict';
 

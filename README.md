@@ -1,8 +1,8 @@
-﻿# Spider King
+﻿# Crawler Reverse Engineering
 
-<img width="1024" height="572" alt="Spider King" src="https://github.com/user-attachments/assets/a621e863-09c6-418f-a320-d453f3330f7a" />
+<img width="1024" height="572" alt="Crawler Reverse Engineering" src="https://github.com/user-attachments/assets/a621e863-09c6-418f-a320-d453f3330f7a" />
 
-`Spider King` 是一套面向 Web 协议恢复、参数还原、挑战链路拆解与纯协议交付的逆向工程 Skill。
+`Crawler Reverse Engineering` 是一套面向 Web 协议恢复、参数还原、挑战链路拆解与纯协议交付的逆向工程 Skill。
 
 它的目标不是“让浏览器替你把请求点过去”，也不是“把页面里的 `fetch` 搬出来凑合跑”，而是把那些看起来依赖浏览器环境、页面上下文、挑战脚本或状态流的目标，拆回成一条可复现、可验证、可维护的本地协议链路。
 
@@ -16,7 +16,7 @@
 
 ## 当前版本
 
-**Spider King 6.0**
+**Crawler Reverse Engineering 6.0**
 
 > 从“可路由的方法论知识库”，升级为“可调度作战系统 + 可执行 profile + 证据工具链 + 自测体系”。
 
@@ -28,7 +28,7 @@
 
 ## 核心定位
 
-`Spider King` 解决的不是“如何自动点击页面”，而是下面这类协议恢复问题：
+`Crawler Reverse Engineering` 解决的不是“如何自动点击页面”，而是下面这类协议恢复问题：
 
 - 页面代码写的是一个接口，但真实网络请求走的是另一个接口
 - 业务层构造了 `sign`、`token` 或 `m`，但发包前又被 transport wrapper 重写
@@ -304,7 +304,7 @@ fresh `live-target`：
 ## 目录结构
 
 ```text
-spider-king/
+crawler-reverse-engineering/
 ├── README.md
 ├── SKILL.md
 ├── agents/
@@ -370,7 +370,7 @@ spider-king/
 ## 安装方式
 
 ```bash
-git clone <your-repo-url> ~/.codex/skills/spider-king
+git clone <your-repo-url> ~/.codex/skills/crawler-reverse-engineering
 ```
 
 或直接把本目录放到支持 `SKILL.md` 自动加载的 skills 路径下。
@@ -430,7 +430,7 @@ python scripts/validate_skill.py
 
 ## 一句话总结
 
-`Spider King` 不是让浏览器替你干活。
+`Crawler Reverse Engineering` 不是让浏览器替你干活。
 
 它是让你把浏览器里看起来神秘、脆弱、依赖上下文的行为，拆回成一条可验证、可复现、可长期运行的本地协议链路。
 

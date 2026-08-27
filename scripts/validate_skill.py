@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Spider King's structure and behavior-preservation invariants."""
+"""Validate Crawler Reverse Engineering's structure and behavior-preservation invariants."""
 
 from __future__ import annotations
 
@@ -53,9 +53,11 @@ NEGATED_MARKER_PREFIX_RE = re.compile(
 MAX_ENTRY_NONBLANK_LINES = 280
 MAX_VALIDATION_FILE_BYTES = 16 * 1024 * 1024
 MAX_SELF_TEST_OUTPUT_BYTES = 1024 * 1024
+CANONICAL_SKILL_NAME = "crawler-reverse-engineering"
+CANONICAL_DISPLAY_NAME = "Crawler Reverse Engineering"
 OFFICIAL_SUITE_TASK_COUNT = 149
 OFFICIAL_SUITE_CONTRACT_SHA256 = (
-    "46d5afad7dbb9acd068188f762576d81c89bf545e4b794c2feef32f4f6eea930"
+    "a7cc1f5844d2b75df1d13b968334ed42865bb93116382797228ec32008724e22"
 )
 TRUSTED_SKILL_ROOT = Path(__file__).resolve().parents[1]
 MarkerGroups = tuple[tuple[str, ...], ...]
@@ -66,7 +68,7 @@ PROFILE_LOCAL_ROUTE_TOKENS = frozenset(
         "js-reverse",
         "live-target",
         "set-cookie",
-        "spider-king",
+        CANONICAL_SKILL_NAME,
     }
 )
 PROFILE_HANDOFF_CONTEXT_MARKERS = (
@@ -77,7 +79,7 @@ PROFILE_HANDOFF_CONTEXT_MARKERS = (
     "route to",
 )
 PROFILE_SPECIAL_HANDOFF_TOKENS = (
-    "`spider-king` AST profile",
+    f"`{CANONICAL_SKILL_NAME}` AST profile",
 )
 PROFILE_AVAILABILITY_MARKERS = (
     "capability snapshot",
@@ -98,7 +100,6 @@ PROFILE_FALLBACK_MARKERS = (
     "不存在时",
 )
 ROOT_SHADOW_DOCUMENTS = (
-    "README.md",
     "INSTALLATION_GUIDE.md",
     "QUICK_REFERENCE.md",
     "CHANGELOG.md",
@@ -715,7 +716,10 @@ def validate_frontmatter(skill_text: str, result: Validation) -> None:
         key, value = line.split(":", 1)
         fields[key.strip()] = value.strip()
 
-    result.require(fields.get("name") == "spider-king", "frontmatter name must be spider-king")
+    result.require(
+        fields.get("name") == CANONICAL_SKILL_NAME,
+        f"frontmatter name must be {CANONICAL_SKILL_NAME}",
+    )
     result.require(bool(fields.get("description")), "frontmatter description must be present")
     result.require(
         set(fields) == {"name", "description"},
@@ -798,16 +802,16 @@ def validate_openai_metadata(metadata_text: str, result: Validation) -> None:
     short_description = values.get("short_description", "")
     default_prompt = values.get("default_prompt", "")
     result.require(
-        display_name == "Spider King",
-        "agents/openai.yaml interface.display_name must match Spider King",
+        display_name == CANONICAL_DISPLAY_NAME,
+        f"agents/openai.yaml interface.display_name must match {CANONICAL_DISPLAY_NAME}",
     )
     result.require(
         not short_description or 25 <= len(short_description) <= 64,
         "agents/openai.yaml interface.short_description must be 25-64 characters",
     )
     result.require(
-        "$spider-king" in default_prompt,
-        "agents/openai.yaml interface.default_prompt must mention $spider-king",
+        f"${CANONICAL_SKILL_NAME}" in default_prompt,
+        f"agents/openai.yaml interface.default_prompt must mention ${CANONICAL_SKILL_NAME}",
     )
     result.require(
         "sequential" in default_prompt.lower(),
@@ -1225,6 +1229,28 @@ def validate_entry_size(skill_text: str, result: Validation, legacy: bool) -> No
     )
 
 
+def validate_root_readme_identity(path: Path, result: Validation) -> None:
+    if is_reparse_point(path) or not path.is_file():
+        result.errors.append("README.md 必须是普通文件")
+        return
+
+    try:
+        readme_text = read_text(path)
+    except (OSError, ValueError) as exc:
+        result.errors.append(f"README.md 无法读取: {exc}")
+        return
+
+    heading = re.search(r"^#\s+(.+?)\s*$", readme_text, re.MULTILINE)
+    result.require(
+        heading is not None and heading.group(1) == CANONICAL_DISPLAY_NAME,
+        f"README.md 一级标题必须是 # {CANONICAL_DISPLAY_NAME}",
+    )
+    result.require(
+        CANONICAL_SKILL_NAME in readme_text,
+        f"README.md 必须包含技能机器名 {CANONICAL_SKILL_NAME}",
+    )
+
+
 def validate_directory_hygiene(root: Path, result: Validation) -> None:
     cache_names = {name.casefold() for name in VALIDATION_IGNORED_DIRS}
     if root.name.casefold() in cache_names:
@@ -1268,6 +1294,15 @@ def validate_directory_hygiene(root: Path, result: Validation) -> None:
                 result.errors.append(
                     f"auxiliary skill document is not allowed: {relative}"
                 )
+
+    for path in sorted(root.rglob("README.md")):
+        if is_validation_ignored(path):
+            continue
+        if path.parent == root:
+            validate_root_readme_identity(path, result)
+            continue
+        relative = path.relative_to(root).as_posix()
+        result.errors.append(f"auxiliary skill document is not allowed: {relative}")
 
 
 def is_reparse_point(path: Path) -> bool:
@@ -1840,7 +1875,7 @@ def build_parser() -> argparse.ArgumentParser:
         "root",
         nargs="?",
         default=str(Path(__file__).resolve().parents[1]),
-        help="Spider King skill directory",
+        help=f"{CANONICAL_DISPLAY_NAME} skill directory",
     )
     parser.add_argument("--baseline", help="Original skill directory used for preservation checks")
     parser.add_argument(

@@ -414,7 +414,7 @@ class ProfileRouteValidationTests(unittest.TestCase):
             root = self.make_profile(
                 directory,
                 "capability snapshot 中 `future-js-reverse` 可用时转交；"
-                "否则返回 Spider core loop。\n",
+                "否则返回 Crawler Reverse Engineering core loop。\n",
             )
             result = validate_skill.Validation()
 
@@ -516,16 +516,49 @@ class DirectoryHygieneValidationTests(unittest.TestCase):
 
             self.assertEqual(result.errors, [])
 
-    def test_rejects_root_readme_shadow_document(self) -> None:
+    def test_accepts_root_readme_repository_document(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / "README.md").write_text("# Duplicate\n", encoding="utf-8")
+            (root / "README.md").write_text(
+                "# Crawler Reverse Engineering\n\n"
+                "Install crawler-reverse-engineering as a skill.\n",
+                encoding="utf-8",
+            )
+            result = validate_skill.Validation()
+
+            validate_skill.validate_directory_hygiene(root, result)
+
+            self.assertEqual(result.errors, [])
+
+    def test_rejects_root_readme_with_legacy_title(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "README.md").write_text(
+                "# Spider King\n\nInstall crawler-reverse-engineering as a skill.\n",
+                encoding="utf-8",
+            )
             result = validate_skill.Validation()
 
             validate_skill.validate_directory_hygiene(root, result)
 
             self.assertTrue(
-                any("root shadow document" in error for error in result.errors),
+                any("一级标题必须是" in error for error in result.errors),
+                result.errors,
+            )
+
+    def test_rejects_root_readme_without_canonical_skill_name(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "README.md").write_text(
+                "# Crawler Reverse Engineering\n\nInstall spider-king as a skill.\n",
+                encoding="utf-8",
+            )
+            result = validate_skill.Validation()
+
+            validate_skill.validate_directory_hygiene(root, result)
+
+            self.assertTrue(
+                any("必须包含技能机器名" in error for error in result.errors),
                 result.errors,
             )
 
@@ -575,9 +608,9 @@ class DirectoryHygieneValidationTests(unittest.TestCase):
 class OpenAIMetadataValidationTests(unittest.TestCase):
     valid_metadata = (
         "interface:\n"
-        '  display_name: "Spider King"\n'
+        '  display_name: "Crawler Reverse Engineering"\n'
         '  short_description: "Protocol-first web reversal and Python delivery"\n'
-        '  default_prompt: "Use $spider-king for sequential protocol analysis."\n'
+        '  default_prompt: "Use $crawler-reverse-engineering for sequential protocol analysis."\n'
         "policy:\n"
         "  allow_implicit_invocation: true\n"
     )
@@ -621,11 +654,11 @@ class OpenAIMetadataValidationTests(unittest.TestCase):
         )
 
     def test_rejects_default_prompt_without_skill_token(self) -> None:
-        text = self.valid_metadata.replace("$spider-king", "the skill")
+        text = self.valid_metadata.replace("$crawler-reverse-engineering", "the skill")
         result = self.validate(text)
 
         self.assertTrue(
-            any("must mention $spider-king" in error for error in result.errors),
+            any("must mention $crawler-reverse-engineering" in error for error in result.errors),
             result.errors,
         )
 

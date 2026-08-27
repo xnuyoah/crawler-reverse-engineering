@@ -18,4 +18,4 @@ WebCrypto、CryptoJS 和随机数的可执行实现统一使用 `../scripts/cryp
 
 需要观察 `atob`、`btoa`、`TextEncoder` 或 `TextDecoder` 时，在任务项目中按 `crypto_api.js` 的 registry/emit/restore 结构增加一个窄 Hook：过滤调用栈或长度，字符串和 buffer 都只给类型/长度。不得复制全值日志片段。
 
-用户要的是算法入口、脚本 URL 或完整调用链时停止扩写 Hook，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Spider core loop。要本地执行已知入口时转 Spider env-patch profile。
+用户要的是算法入口、脚本 URL 或完整调用链时停止扩写 Hook，按 profile 入口的 capability-aware 契约转交；专用技能不可用时返回 Crawler Reverse Engineering core loop。要本地执行已知入口时转 Crawler Reverse Engineering env-patch profile。
