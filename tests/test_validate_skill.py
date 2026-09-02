@@ -688,7 +688,8 @@ class DirectoryHygieneValidationTests(unittest.TestCase):
             keep = root / "tests" / "test_keep.py"
             keep.write_text("def test_ok():\n    assert True\n", encoding="utf-8")
 
-            removed = validate_skill.clean_package_hygiene(root)
+            with mock.patch.object(validate_skill, "TRUSTED_SKILL_ROOT", root.resolve()):
+                removed = validate_skill.clean_package_hygiene(root)
 
             self.assertTrue(any("__pycache__" in item for item in removed), removed)
             self.assertTrue(any("_err_test_example.py.txt" in item for item in removed), removed)
@@ -698,6 +699,13 @@ class DirectoryHygieneValidationTests(unittest.TestCase):
             result = validate_skill.Validation()
             validate_skill.validate_directory_hygiene(root, result)
             self.assertEqual(result.errors, [])
+
+    def test_clean_package_hygiene_rejects_untrusted_root(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+
+            with self.assertRaisesRegex(ValueError, "reviewed trusted skill root"):
+                validate_skill.clean_package_hygiene(root)
 
 
 class OpenAIMetadataValidationTests(unittest.TestCase):

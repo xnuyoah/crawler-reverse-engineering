@@ -46,12 +46,12 @@ def _clean_skill_hygiene(skill_root: Path) -> list[str]:
     cache_dirs: list[Path] = []
     for dirpath, dirnames, filenames in os.walk(skill_root, topdown=False, followlinks=False):
         parent = Path(dirpath)
-        if parent.name in _CACHE_DIR_NAMES:
+        if parent.name.casefold() in _CACHE_DIR_NAMES:
             cache_dirs.append(parent)
             continue
         for file_name in filenames:
             path = parent / file_name
-            if _is_runner_dump(file_name) or file_name.endswith((".pyc", ".pyo")):
+            if _is_runner_dump(file_name) or file_name.casefold().endswith((".pyc", ".pyo")):
                 try:
                     path.unlink(missing_ok=True)
                     removed.append(path.relative_to(skill_root).as_posix())

@@ -38,7 +38,7 @@ Pass conditions:
 - generated tool caches (`.pytest_cache`, `.ruff_cache`, `.mypy_cache`, `__pycache__`, `.cache`, `htmlcov`, `node_modules`, venvs) are package errors; scanners may skip their contents only to avoid duplicate noise
 - generated local noise (`.pyc`, `.log`, `.tmp`, `.DS_Store`, coverage files) and test-runner dumps (`tests/_err_*.txt`, `tests/_out_*.txt`) are package errors and must stay gitignored
 - run unit tests with `PYTHONDONTWRITEBYTECODE=1` (also enforced by `tests/conftest.py`, which auto-cleans leaked cache/dumps on session finish)
-- to scrub known dirt then re-validate: `python scripts/validate_skill.py --clean-hygiene`
+- to scrub known dirt from the validator's reviewed current skill root, then re-validate: `python scripts/validate_skill.py --clean-hygiene`
 - `agents/openai.yaml` parses as YAML with typed `interface` metadata, a 25-64 character short description, a `$crawler-reverse-engineering` default prompt, and a boolean implicit-invocation policy
 - final delivery never depends on browser automation
 - final delivery is Python collector first, with JS limited to local parameter restoration only

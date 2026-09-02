@@ -1375,8 +1375,19 @@ def iter_package_hygiene_targets(root: Path) -> list[tuple[Path, str, str]]:
 
 
 def clean_package_hygiene(root: Path) -> list[str]:
-    """Remove known generated dirt. Returns relative paths that were removed."""
-    root = root.resolve()
+    """Remove known generated dirt from the reviewed skill root."""
+    requested_root = root.absolute()
+    if normalized_absolute_path(requested_root) != normalized_absolute_path(
+        TRUSTED_SKILL_ROOT
+    ):
+        raise ValueError(
+            "package hygiene cleanup may run only from the validator's reviewed "
+            "trusted skill root"
+        )
+    if is_reparse_point(requested_root):
+        raise ValueError("package hygiene cleanup root must not be a symlink or reparse point")
+
+    root = requested_root.resolve(strict=True)
     if not root.is_dir():
         raise ValueError(f"skill root is not a directory: {root}")
 
@@ -1390,6 +1401,12 @@ def clean_package_hygiene(root: Path) -> list[str]:
     for path, _kind, relative in files + dirs:
         if is_reparse_point(path):
             # Never delete through reparse points / symlinks.
+            continue
+        try:
+            canonical_parent = path.parent.resolve(strict=True)
+        except OSError:
+            continue
+        if not is_relative_to(canonical_parent, root):
             continue
         try:
             if path.is_dir():
@@ -2044,8 +2061,9 @@ def build_parser() -> argparse.ArgumentParser:
         "--clean-hygiene",
         action="store_true",
         help=(
-            "Remove known generated cache/noise files from the skill package before validation. "
-            "Only matches package-dirt patterns; does not delete source or references."
+            "Remove known generated cache/noise files from the validator's reviewed current "
+            "skill root before validation. Only matches package-dirt patterns; does not "
+            "delete source or references."
         ),
     )
     return parser
